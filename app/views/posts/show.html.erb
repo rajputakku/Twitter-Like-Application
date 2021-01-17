@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @post.body %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @post.status %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @post.user_id %>
+</p>
+<%= link_to "Like", post_likes_path(@post), method: :post %>
+<%= "#{@post.likes.count}" %>
+
+<div class="post_comment">
+<p>
+	<% if @post.status=="Publish" && @post.comments.present? %>
+	<h4>Comments : </h4>
+	<div >
+		<%= render partial: 'posts/comment', collection: @post.comments %>
+		<div>
+			<% else %>
+			<h4>You don't have any comment.</h4>
+			<% end %>
+		</p>
+</div>
+<br>
+<% if @post.status=="Publish" %>
+<%= render partial: 'comments/form', comment: @comment %>
+<% end %>
+<% if @post.user_id == current_user.id %>
+<%= link_to 'Delete', post_path(@post), method: :delete, remote: true, data: {confirm: "Really you wants to delete the article?"} %>&nbsp;
+<%end%>
+<%= link_to 'Back', posts_path %>
