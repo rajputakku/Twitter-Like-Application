@@ -1,8 +1,9 @@
+<% if current_user.present? %>
 <p id="notice"><%= notice %></p>
 <div style="text-align: right;">
-<%= link_to 'Draft Tweets', draft_path %>
+<%= link_to 'Draft Posts', draft_path %>
 </div>
-<h1>All Tweets</h1>
+<h1>All Posts</h1>
 
 <table>
   <thead>
@@ -27,3 +28,4 @@
 <br>
 
 <%= link_to 'New Post', new_post_path %>
+<% end %>
